@@ -13,10 +13,9 @@ class PostViewModel(private val postRepository: PostRepository) : ViewModel() {
     val postData:MutableLiveData<List<Quotes>> = MutableLiveData()
 
     /*  way 1 */
-    fun getPost()
-    {
+    fun getPost(map:MutableMap<String, String>) {
         viewModelScope.launch {
-            postRepository.getPost()
+            postRepository.getPost(map)
                 .catch { e->
                     Log.d("main", "getPost: ${e.message}")
                 }

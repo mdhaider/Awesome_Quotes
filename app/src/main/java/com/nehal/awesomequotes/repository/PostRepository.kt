@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.flowOn
 
 class PostRepository {
 
-    fun getPost(): Flow<QuoteResponse> = flow {
-        val postList = RetrofitBuilder.api.getPost()
+    fun getPost(map:MutableMap<String, String>): Flow<QuoteResponse> = flow {
+        val postList = RetrofitBuilder.ROUTES.getPost(map)
         emit(postList)
     }.flowOn(Dispatchers.IO)
 }

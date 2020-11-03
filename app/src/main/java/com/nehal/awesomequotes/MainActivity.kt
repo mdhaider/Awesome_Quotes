@@ -1,9 +1,9 @@
 package com.nehal.awesomequotes
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,13 +25,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initUi()
         val postViewModelFactory= PostViewModelFactory(PostRepository())
-        postViewModel= ViewModelProvider(this,postViewModelFactory)[PostViewModel::class.java]
-        postViewModel.getPost()
+        postViewModel= ViewModelProvider(this, postViewModelFactory)[PostViewModel::class.java]
+        val data: MutableMap<String, String> = HashMap()
+        data["count"] = "1"
+        data["limit"] = "30"
+        data["order"] = "quoteText"
+       // data["where"] = "{"+"quoteAuthor"+":"+"Liam Neeson"+"}"
+
+        postViewModel.getPost(data)
         postViewModel.postData.observe(this, Observer {
             Log.d(TAG, "onCreate: ${it[0].quoteText}")
             postAdapter.setPostData(it as ArrayList<Quotes>)
-            progressBar.visibility= View.GONE
-            recyclerView.visibility= View.VISIBLE
+            progressBar.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
         })
     }
 

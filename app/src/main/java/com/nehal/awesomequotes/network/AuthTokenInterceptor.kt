@@ -5,7 +5,6 @@ import okhttp3.Response
 
 class AuthTokenInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-
         val originalRequest = chain.request()
         val requestBuilder = originalRequest.newBuilder()
             .header("X-Parse-Application-Id", "JcABJkhzoG2kLuTiA0Ief4EvoZLreP0TbYFruLmx")
